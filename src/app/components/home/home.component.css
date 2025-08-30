@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:host {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/assets/images/shaded-background.jpg');
+}
+
+/* ---------- Sidebar ---------- */ 
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(3px);
+    border-right: .15vw solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    padding: 6px 14px;
+    transition: .5s;
+}
+.sidebar.active {
+    width: 260px; 
+}
+.sidebar .logo-menu {
+    display: flex; 
+    align-items: center; 
+    width: 100%; 
+    height: 70px;
+}
+.sidebar .logo-menu .logo {
+    font-size: 25px; 
+    color: #fff; 
+    pointer-events: none; 
+    opacity: 0; 
+    transition: .3s;
+}
+.sidebar.active .logo-menu .logo {
+    opacity: 1; 
+    transition-delay: .2s;
+}
+.sidebar .logo-menu .toggle-button {
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 40px; 
+    height: 40px;
+    font-size: 22px; 
+    color: #fff; 
+    text-align: center; 
+    line-height: 40px; 
+    cursor: pointer; 
+    transition: .5s;
+}
+.sidebar.active .logo-menu .toggle-button {
+    left: 90%;
+}
+.sidebar .list {
+    margin-top: 10px;
+}
+.sidebar .link-name { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity .3s; 
+}
+.sidebar.active .link-name { 
+    opacity: 1; 
+    pointer-events: auto; 
+    transition-delay: calc(.1s * var(--i)); 
+}
+
+.list .list-item {
+    list-style: none; 
+    width: 100%; 
+    height: 50px; 
+    margin: 7.5px 0; 
+    line-height: 50px;
+}
+.list .list-item a {
+    display: flex; 
+    align-items: center; 
+    font-size: 18px; 
+    color: #fff; 
+    text-decoration: none;
+    border-radius: 6px; 
+    white-space: nowrap; 
+    transition: .5s; 
+    cursor: pointer;
+}
+.list .list-item.active a, .list .list-item a:hover { 
+    background: rgba(255, 255, 255, .2); 
+    transform: scale(1.05);
+}
+.list .list-item a i { 
+    min-width: 50px; 
+    height: 50px; 
+    text-align: center; 
+    line-height: 50px; 
+}
+
+.username {
+    position: absolute; 
+    padding: 0 10px 15px;
+    list-style: none;
+    bottom: 0;
+    font-size: 20px;
+    font-weight: 500; 
+    color: #fff;
+}
+
+
+/* ---------- Container ---------- */
+.container {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    left: 300px;
+    right: 40px;
+    bottom: 40px;
+    top: 40px;
+    width: auto;
+    height: auto;
+    transition: .5s;
+}
+.container.active { 
+    left: 120px; 
+}
+
+
+/* ---------- Feed ---------- */
+.feed-container {
+    display: flex; 
+    flex-direction: column; 
+    position: absolute; 
+    left: 0;
+    height: 100%; 
+    width: 100%;
+    border: .2vw solid #fff; 
+    border-radius: 5px; 
+    backdrop-filter: blur(3px);
+    padding-right: 6.5px;
+}
+.feed-title {
+    color: #fff;
+    font-size: 1.75vw;
+    font-weight: 600;
+    margin-top: 5px; 
+    padding-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 14px; 
+    border-bottom: .15vw solid #fff;
+}
+
+.no-new-posts { 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    height: 100%; 
+    width: 100%; 
+    padding: 20px; 
+}
+.no-posts-message {
+    color: #fff; 
+    font-size: 1.75vw;
+    font-weight: 600;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    margin-left: 20px; 
+    margin-right: 14px; 
+    text-align: center;
+}
+
+.add-liked-posts {
+    width: fit-content;
+    justify-content: center;
+    padding: 5px 15px;
+    background: transparent;
+    border: .2vw solid #fff;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1vw;
+    color: #fff; 
+    font-weight: 500;
+}
+
+.feed-posts { 
+    height: 93%; 
+    padding-left: 20px; 
+    padding-right: 6px;
+    transition: .5s; 
+}
+.feed-scroll-box {
+    overflow: hidden; 
+    overflow-y: scroll;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, black var(--top-mask-size, 0), black calc(100% - var(--bottom-mask-size, 0)), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, black var(--top-mask-size, 0), black calc(100% - var(--bottom-mask-size, 0)), transparent 100%);
+    --top-mask-size: 10px; --bottom-mask-size: 0px;
+}
+.feed-scroll-box::-webkit-scrollbar { 
+    width: 0.5em; 
+}
+.feed-scroll-box::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 0.25em; 
+    cursor: pointer; 
+}

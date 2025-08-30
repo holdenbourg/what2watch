@@ -1,0 +1,81 @@
+<nav class="sidebar" [class.active]="sidebarActive()">
+    <div class="logo-menu">
+        <h2 class="logo">What2Watch</h2>
+        <i class="bx bx-menu toggle-button" (click)="toggleSidebar()"></i>
+    </div>
+
+    <ul class="list">
+        <li class="list-item active">
+            <a (click)="routingService.navigateToHome()">
+                <i class="bx bx-home-alt"></i>
+                <span class="link-name" style="--i:1;">Home</span>
+            </a>
+        </li>
+        <li class="list-item">
+            <a (click)="routingService.navigateToSearchMovies()">
+                <i class="bx bx-search"></i>
+                <span class="link-name" style="--i:2;">Search</span>
+            </a>
+        </li>
+        <li class="list-item">
+            <a (click)="routingService.navigateToMovies()">
+                <i class="bx bx-camera-movie"></i>
+                <span class="link-name" style="--i:3;">Movies</span>
+            </a>
+        </li>
+        <li class="list-item">
+            <a (click)="routingService.navigateToShows()">
+                <i class="bx bx-collection"></i>
+                <span class="link-name" style="--i:4;">Shows</span>
+            </a>
+        </li>
+        <li class="list-item">
+            <a (click)="routingService.navigateToSummary()">
+                <i class="bx bx-bar-chart-alt-2"></i>
+                <span class="link-name" style="--i:5;">Summary</span>
+            </a>
+        </li>
+        <li class="list-item">
+            <a (click)="routingService.navigateToAccountsPosts(currentUser.username)">
+                <i class="bx bx-user"></i>
+                <span class="link-name" style="--i:6;">Account</span>
+            </a>
+        </li>
+        <li class="list-item">
+            <a (click)="routingService.navigateToSettings()">
+                <i class="bx bx-cog"></i>
+                <span class="link-name" style="--i:7;">Settings</span>
+            </a>
+        </li>
+
+        <li class="username">
+            <p class="link-name" style="--i:8">Signed in as:</p>
+            <p class="link-name" style="--i:8">{{ currentUser.username }}</p>
+        </li>
+    </ul>
+
+</nav>
+
+<div class="container" [class.active]="sidebarActive() === false">
+    <div class="feed-container">
+        <p class="feed-title">Feed</p>
+
+        <div class="no-new-posts" *ngIf="usersFeedPosts.length === 0">
+            <p class="no-posts-message">No New Posts</p>
+            <button
+                class="add-liked-posts"
+                *ngIf="usersMemoryLanePosts.length !== 0"
+                (click)="usersFeedPosts = usersMemoryLanePosts">
+                Scroll Down Memory Lane
+            </button>
+        </div>
+
+        <div class="feed-scroll-box">
+            <div class="feed-posts">
+                <div class="post" *ngFor="let userFeedPost of usersFeedPosts; trackBy: trackPost; let i = index">
+                    <app-feed-post [feedPost]="userFeedPost" class="feed-post-{{ i }}"></app-feed-post>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

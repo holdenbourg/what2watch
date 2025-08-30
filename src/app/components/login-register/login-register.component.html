@@ -1,0 +1,98 @@
+<div class="wrapper" [class.active]="activePanel === 'register'">
+    <div class="form-box login">
+        <h2>Login</h2>
+        <div class="warning-banner" [class.show]="showWarning" [ngClass]="warningType" role="status" aria-live="polite">
+            <p>{{ warning }}</p>
+        </div>
+
+        <form (ngSubmit)="onLogin()" novalidate>
+            <div class="input-box">
+                <span class="icon"><i class="bx bxs-user"></i></span>
+
+                <input type="text" [(ngModel)]="loginObject.username" name="login-username" required autocomplete="username" aria-label="Username"/>
+                
+                <label>Username</label>
+            </div>
+
+            <div class="input-box">
+                <input [type]="showLoginPassword ? 'text' : 'password'" [(ngModel)]="loginObject.password" name="login-password" required autocomplete="current-password" (keyup.enter)="onLogin()" aria-label="Password"/>
+                
+                <label>Password</label>
+
+                <button type="button" class="toggle-btn" (click)="showLoginPassword = !showLoginPassword" [attr.aria-pressed]="showLoginPassword" [attr.aria-label]="showLoginPassword ? 'Hide password' : 'Show password'">
+                    <i class="{{ showLoginPassword ? 'bx bxs-lock-open-alt' : 'bx bxs-lock-alt' }}"></i>
+                </button>
+            </div>
+
+            <div class="remember-forgot">
+                <label><input type="checkbox" [checked]="rememberMeChecked" (click)="toggleRememberMe()" />Remember me</label>
+                
+                <a (click)="$event.preventDefault()">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="button">Login</button>
+
+            <div class="login-register">
+                <p>Don't have an account?<a (click)="toggleLoginRegister()" class="register-link">Register</a></p>
+            </div>
+        </form>
+    </div>
+
+    <div class="form-box register">
+        <h2>Register</h2>
+
+        <div class="warning-banner" [class.show]="showWarning" [ngClass]="warningType" role="status" aria-live="polite">
+            <p>{{ warning }}</p>
+        </div>
+
+        <form (ngSubmit)="onRegister()" novalidate>
+            <div class="input-box">
+                <input type="text" [(ngModel)]="registerObject.firstName" name="register-first-name" required aria-label="First Name"/>
+                
+                <label>First Name</label>
+            </div>
+
+            <div class="input-box">
+                <input type="text" [(ngModel)]="registerObject.lastName" name="register-last-name" required aria-label="Last Name"/>
+
+                <label>Last Name</label>
+            </div>
+
+            <div class="input-box">
+                <input type="email" [(ngModel)]="registerObject.email" name="register-email" required autocomplete="email" aria-label="Email"/>
+                
+                <label>Email</label>
+            </div>
+
+            <div class="input-box">
+                <input type="text" [(ngModel)]="registerObject.username" name="register-username" required autocomplete="username" aria-label="Username"/>
+
+                <label>Username</label>
+            </div>
+
+            <div class="input-box">
+                <input [type]="showRegisterPassword ? 'text' : 'password'" [(ngModel)]="registerObject.password" name="register-password" required autocomplete="new-password" (keyup.enter)="onRegister()" aria-label="Password"/>
+
+                <label>Password</label>
+
+                <button type="button" class="toggle-btn" (click)="showRegisterPassword = !showRegisterPassword" [attr.aria-pressed]="showRegisterPassword" [attr.aria-label]="showRegisterPassword ? 'Hide password' : 'Show password'">
+                    <i class="{{ showRegisterPassword ? 'bx bxs-lock-open-alt' : 'bx bxs-lock-alt' }}"></i>
+                </button>
+            </div>
+
+            <div class="agree-to-terms">
+                <label>
+                    <input type="checkbox" [(ngModel)]="termsChecked" name="terms"/>I agree to the terms &amp; conditions
+                </label>
+
+                <a (click)="$event.preventDefault()">terms</a>
+            </div>
+
+            <button type="submit" class="button">Register</button>
+
+            <div class="login-register">
+                <p>Already have an account?<a (click)="toggleLoginRegister()" class="login-link">Login</a></p>
+            </div>
+        </form>
+    </div>
+</div>
